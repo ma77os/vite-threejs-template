@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { gui } from "../settings";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Gallery from "./Gallery";
 
@@ -112,4 +113,18 @@ export default function World() {
 	window.addEventListener("resize", resize);
 
 	render();
+
+	// gui
+	function setupGUI() {
+		// light
+		const lightFolder = gui.addFolder("Light").close();
+		lightFolder.add(directionalLight, "intensity", 0, 10);
+		lightFolder.add(directionalLight.position, "x", -20, 20);
+		lightFolder.add(directionalLight.position, "y", -20, 20);
+		lightFolder.add(directionalLight.position, "z", -20, 20);
+		lightFolder.add(directionalLight.shadow, "bias", 0, 0.001);
+		lightFolder.add(directionalLight.shadow, "normalBias", 0, 1);
+	}
+
+	setupGUI();
 }

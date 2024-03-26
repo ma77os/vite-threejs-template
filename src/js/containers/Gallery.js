@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { gui } from "../settings";
 import { mergeVertices } from "three/addons/utils/BufferGeometryUtils.js";
 import CustomShaderMaterial from "three-custom-shader-material/vanilla";
 import galleryVertexShader from "/shaders/gallery/gallery_vertex.glsl";
@@ -34,6 +35,9 @@ export default class Gallery extends THREE.Group {
 
 	uniforms = {
 		time: { value: 0 },
+		positionFrequency: { value: 0.3 },
+		timeFrequency: { value: 0.2 },
+		noiseStrength: { value: 5 },
 	};
 
 	constructor() {
@@ -114,6 +118,21 @@ export default class Gallery extends THREE.Group {
 		this.mesh.receiveShadow = true;
 		this.mesh.customDepthMaterial = this.depthMaterial;
 		this.add(this.mesh);
+
+		this.setupGUI();
+	}
+
+	setupGUI() {
+		const galleryFolder = gui.addFolder("Gallery");
+		galleryFolder
+			.add(this.uniforms.positionFrequency, "value", 0, 2)
+			.name("positionFrequency");
+		galleryFolder
+			.add(this.uniforms.timeFrequency, "value", 0, 2)
+			.name("timeFrequency");
+		galleryFolder
+			.add(this.uniforms.noiseStrength, "value", 0, 10)
+			.name("noiseStrength");
 	}
 
 	update(time) {

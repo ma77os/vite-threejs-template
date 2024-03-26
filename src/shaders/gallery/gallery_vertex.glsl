@@ -1,20 +1,18 @@
 #include ../includes/simplexNoise4d.glsl
 
 uniform float time;
+uniform float positionFrequency;
+uniform float timeFrequency;
+uniform float noiseStrength;
 attribute vec4 tangent;
 
 
 float getDistortion(vec3 position)
 {
-    float freq = 0.5;
-    float timeFreq = 0.4;
-    float strength = 0.8;
-    return simplexNoise4d(vec4(position * freq, time * timeFreq)) * strength;
-    // return vec3(
-    //     sin(position.y * 0.5 + time*2.) * 0.5,
-    //     0.0,
-    //     cos(position.x * 1.1 * sin(time*0.4)*1.5) * 0.3
-    // );
+    return simplexNoise4d(vec4(
+        position * positionFrequency, 
+        time * timeFrequency
+    )) * noiseStrength;
 }
 
 void main()
