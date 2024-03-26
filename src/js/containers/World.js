@@ -14,7 +14,7 @@ export default function World() {
 		0.1,
 		100
 	);
-	camera.position.z = 20;
+	camera.position.z = 15;
 
 	// Renderer
 	const renderer = new THREE.WebGLRenderer({
@@ -56,6 +56,8 @@ export default function World() {
 	directionalLight.shadow.camera.right = 20;
 	// directionalLight.shadow.radius = 10;
 	// directionalLight.shadow.blurSamples = 16;
+	directionalLight.shadow.bias = 0.0; // 0 is default
+	directionalLight.shadow.normalBias = 0.01; // 0 is default
 	scene.add(directionalLight);
 
 	// light shadow helper
