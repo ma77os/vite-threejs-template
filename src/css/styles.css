@@ -1,0 +1,10 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  margin:0;
+  font-family:Arial;
+  color:white;
+  background-color: #000;
+}
